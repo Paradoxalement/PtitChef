@@ -28,7 +28,7 @@ fetch(`data.json`)
 
     function affiche(prod){
         
-        prod.ingredients.forEach(ing=> {
+       /* prod.ingredients.forEach(ing=> {
             console.log(ing)
             console.log(ing.quantite, ing.unite, ing.aliment)
             
@@ -39,10 +39,10 @@ fetch(`data.json`)
         let ingredientContainer = document.querySelector("#ingredient")
         ingredientContainer.innerHTML +=
         ` <li> ${qte} ${unite} ${aliment} </li> `
-        });
+        });*/
 
 
-        prod.etapes.forEach(etape=> {
+       /* prod.etapes.forEach(etape=> {
             console.log(etape)
             console.log(etape.numeroEtape, etape.descEtape)
     
@@ -53,7 +53,7 @@ fetch(`data.json`)
             let etapeContainer = document.querySelector("#etape")
             etapeContainer.innerHTML +=
             ` <li> ${numEtape} ${etapedesc}</li> `;
-            });
+            });*/
             
             let nom = prod.image
             let img = prod.title;
@@ -62,6 +62,20 @@ fetch(`data.json`)
             let tempCuisson = prod.tempCuisson;
             let portions = prod.portions;
             
+            // on traite les ingredients : prod.ingredients est un tableau avec des clés quantite, unite et aliment
+            // on a besoin de generer : <li>200 gr de pate</li>
+            let listeIng = ""
+            prod.ingredients.forEach(ing=>{
+                listeIng+=`<li>${ing.quantite} ${ing.unite} ${ing.aliment} </li>`
+            })
+            console.log(listeIng)
+
+
+            let listeEtape = ""
+            prod.etapes.forEach(etp=>{
+                listeEtape+=`<li> ${etp.numEtape} ${etp.etapedesc} </li>`
+            })
+            console.log(listeEtape)
     
         // Ajoute le contenu à la carte
         let cardContainer = document.querySelector("#result")
@@ -78,13 +92,13 @@ fetch(`data.json`)
                     <div>
                         <h4>Ingrédients</h4>
                         <ul id="ingredients">
-                            <li> ${qte} ${unite} ${aliment}</li>
+                           ${listeIng}
                         </ul>
                     </div>
                     <div>
                         <h4></h4>
                         <ol id="etape">
-                            <li> ${numEtape} ${etapedesc}</li>
+                           ${listeEtape}
                         </ol>
                     </div>
                     <div>
